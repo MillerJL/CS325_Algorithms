@@ -21,12 +21,9 @@ def main():
     intersections = 0
 
     for qIndex in range(0, pointCount):
-        # print 'Loop: ' + str(qIndex)
         for q2Index in range(qIndex + 1, pointCount):
-            intersections += 1
-        print intersections
-            # if(int(p[q2Index]) < int(p[qIndex])):
-            #     intersections += 1
+            if(int(p[q2Index]) < int(p[qIndex])):
+                intersections += 1
     print intersections
 
 if __name__ == '__main__':
