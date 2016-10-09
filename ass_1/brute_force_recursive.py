@@ -19,8 +19,7 @@ def recursiveSolve(q, qCompare, p, intersections):
         if(int(p[qIndex]) < int(p[qCompare])):
             intersections += 1
     if(qCompare + 1 < len(p)):
-        print intersections
-        recursiveSolve(q, qCompare + 1, p, intersections)
+        return recursiveSolve(q, qCompare + 1, p, intersections)
 
     return intersections
 
