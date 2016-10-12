@@ -6,6 +6,7 @@
 
 import sys
 import csv
+import time
 
 def getFileContents(filePath):
     """ Gets the contents of an input file and return it
@@ -97,5 +98,21 @@ def merge(arr, beg, mid, end):
 
     return intersections
 
-fileContents = map(int, getFileContents(sys.argv[1])[2])
-writeOutputFile(mergeSort(fileContents, 0, len(fileContents) - 1))
+file_list = [
+    'data/100.txt',
+    'data/500.txt',
+    'data/1000.txt',
+    'data/2000.txt',
+    'data/5000.txt',
+    'data/10000.txt'
+]
+
+for dataFile in file_list:
+    totalTime = 0.0
+    for i in range(0, 10):
+        fileContents = map(int, getFileContents(dataFile)[0])
+        start_time = time.time()
+        num_intersections = mergeSort(fileContents, 0, len(fileContents) - 1)
+        totalTime += (time.time() - start_time)/10
+    print("%s" % ((totalTime) / 10))
+        # print("%s" % ((time.time() - start_time)/10))
