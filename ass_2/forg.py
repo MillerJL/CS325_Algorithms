@@ -30,7 +30,7 @@ def Jump(P, Q, leash):
     if P_len == 0 and Q_len == 0:
         return True
 
-    if (P_len > 0 and Q_len > 0) and (distance(P[P_len - 1], Q[Q_len - 1]) <= leash):
+    if (P_len > 0 and Q_len > 0) and distance(P[P_len - 1], Q[Q_len - 1]) <= leash:
         return Jump(P[0:P_len], Q[0:Q_len], leash)
 
     if P_len > 0 and (distance(P[P_len - 1], Q[Q_len]) <= leash):
