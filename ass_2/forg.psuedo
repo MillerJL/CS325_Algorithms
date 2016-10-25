@@ -1,0 +1,14 @@
+J(P[1...m], Q[1...n], leash)
+  if len(P) == 1 and len(Q) == 1
+    return true
+
+  if (len(P) > 1 and len(Q) > 1) and (distance(P[m - 1], Q[j - 1]) <= leash)
+    J(P[1...m - 1], Q[1...n - 1], leash)
+
+  if len(P) > 1 and (distance(P[m - 1], Q[j]) <= leash)
+    J(P[1...m - 1], Q[1...j], leash)
+
+  if len(Q) > 1 and (distance(P[i], Q[j - 1]) <= leash)
+    J(P[1...i], Q[1...j - 1], leash)
+
+  return false
