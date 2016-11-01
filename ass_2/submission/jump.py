@@ -63,43 +63,58 @@ def Jump(P, Q, leash):
     # Length of current possible Q moves left
     Q_len = len(Q) - 1
 
+    # Starting point is impossible
     if distance(P[P_len], Q[Q_len]) > leash:
         return False
 
+    # We've reached the end and it is possible
     if P_len == 0 and Q_len == 0:
         return True
 
+    # Double jump
     if (P_len > 0 and Q_len > 0) and distance(P[P_len - 1], Q[Q_len - 1]) <= leash:
         return Jump(P[0:P_len], Q[0:Q_len], leash)
 
+    # P jump
     if P_len > 0 and distance(P[P_len - 1], Q[Q_len]) <= leash:
         return Jump(P[0:P_len], Q, leash)
 
+    # Q jump
     if Q_len > 0 and distance(P[P_len], Q[Q_len - 1]) <= leash:
         return Jump(P, Q[0:Q_len], leash)
 
+    # No possible moves
     return False
 
 # Read file contents in and format it
 fileContents = getFileContents(sys.argv[1])
 
+# List of leashes
 L = fileContents[5]
+# Sorts leash lengths so we can use binary tree
 L.sort()
 
-i = 0
+# Current best leash length. Starts at False to function as a base case if L is of size 0.
 bestLeash = False
+# current length of list of leashes we are searching
 L_length = int(len(L))
 
 while(L_length >= 1):
     L_length = int(len(L))
+    # Index half-way point of given list of leashes
     i = int(math.ceil(len(L)/2))
+    # Store boolean value if it's possible with given leash
     result = Jump(fileContents[1], fileContents[3], L[i])
 
+    # Leash too small, need bigger leash
     if result == False:
         L = L[i:len(L)]
+    # Leash possible too big, check smaller leashes
     else:
         bestLeash = L[i]
         L = L[0:i]
+    # Determine if our binary tree is completed
     L_length = (L_length - int(len(L)))
 
+# Write result
 writeOutputFile(bestLeash)
